@@ -15,7 +15,6 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
