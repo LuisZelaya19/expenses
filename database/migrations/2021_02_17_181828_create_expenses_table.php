@@ -17,6 +17,7 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->decimal('amount', 12, 2)->nullable();
+            $table->date('entry_date')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

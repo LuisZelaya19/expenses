@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExpenseRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
-use Illuminate\Http\Request;
+
+//use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
@@ -15,6 +18,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+        return view('admin.expenses.index');
     }
 
     /**
@@ -24,7 +28,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.expenses.create');
     }
 
     /**
@@ -33,9 +37,10 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreExpenseRequest $request)
     {
-        //
+        Expense::create($request->validated());
+        return view('admin.expenses.index')->with('success', 'Gasto registrado exitosamente');
     }
 
     /**
@@ -67,7 +72,7 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(UpdateExpenseRequest $request, Expense $expense)
     {
         //
     }
