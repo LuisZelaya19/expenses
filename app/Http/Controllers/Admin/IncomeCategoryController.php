@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreIncomeCategoryRequest;
 use App\Models\IncomeCategory;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class IncomeCategoryController extends Controller
 {
@@ -15,6 +17,13 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            $incomeCategory = IncomeCategory::select(['id', 'name']);
+
+            return DataTables::of($incomeCategory)
+                ->make(true);
+        }
+        return view('admin.incomeCategories.index');
     }
 
     /**
@@ -24,7 +33,7 @@ class IncomeCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.incomeCategories.create');
     }
 
     /**
@@ -33,9 +42,11 @@ class IncomeCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreIncomeCategoryRequest $request)
     {
-        //
+        IncomeCategory::create($request->validated());
+
+        return view('admin.incomeCategories.index');
     }
 
     /**

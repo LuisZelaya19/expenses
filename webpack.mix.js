@@ -17,3 +17,4 @@ mix.postCss('resources/css/app.css', 'public/css', [
    require('tailwindcss'),
 ]).version();
 
+mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');

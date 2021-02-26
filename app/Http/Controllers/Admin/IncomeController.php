@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIncomeRequest;
 use App\Models\Income;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class IncomeController extends Controller
 {
@@ -16,7 +17,16 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        //
+        if (request()->ajax()) {
+            $incomes = Income::select(['id', 'name', 'entry_date', 'amount'])->orderBy('entry_date', 'DESC');
+
+            return DataTables::of($incomes)
+                ->addColumn('action', 'admin.incomes.action')
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.incomes.index');
     }
 
     /**
@@ -26,7 +36,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.incomes.create');
     }
 
     /**
@@ -37,7 +47,8 @@ class IncomeController extends Controller
      */
     public function store(StoreIncomeRequest $request)
     {
-        //
+        Income::create($request->validated());
+        return redirect()->route('incomes.index');
     }
 
     /**
@@ -59,7 +70,7 @@ class IncomeController extends Controller
      */
     public function edit(Income $income)
     {
-        //
+        return view('admin.incomes.edit', compact('income'));
     }
 
     /**

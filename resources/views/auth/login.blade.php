@@ -2,16 +2,15 @@
 
 @section('content')
 <div class="flex items-center justify-center mt-16 mx-6">
-    <div class="p-6 max-w-sm w-full bg-white shadow rounded-md">
-        <h3 class="text-gray-700 text-xl text-center">{{ __('Login') }}</h3>
+    <div class="w-full max-w-sm p-6 bg-white shadow rounded-md">
+        <h3 class="text-xl text-center text-gray-700">{{ __('Login') }}</h3>
 
         <form class="mt-4" method="POST" action="{{ route('login') }}">
             @csrf
 
             <label class="block">
-                <span class="text-gray-700 text-sm">{{ __('E-Mail Address') }}</span>
-                <input type="email" id="email" name="email" class="mt-1 w-full form-input" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                <span class="text-sm text-gray-700">{{ __('E-Mail Address') }}</span>
+                <input type="email" id="email" name="email" class="w-full mt-1 form-input" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
                 <span class="text-sm text-red-500" role="alert">
                     <strong>{{ $message }}</strong>
@@ -20,9 +19,8 @@
             </label>
 
             <label class="block mt-3">
-                <span class="text-gray-700 text-sm">{{ __('Password') }}</span>
-                <input id="password" type="password" class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="password" required autocomplete="current-password">
-
+                <span class="text-sm text-gray-700">{{ __('Password') }}</span>
+                <input id="password" type="password" class="form-input" name="password" required autocomplete="current-password">
                 @error('password')
                 <span class="text-sm text-red-500" role="alert">
                     <strong>{{ $message }}</strong>
@@ -30,11 +28,11 @@
                 @enderror
             </label>
 
-            <div class="flex justify-between items-center mt-4">
+            <div class="flex items-center justify-between mt-4">
                 <div>
                     <label class="inline-flex items-center">
-                        <input type="checkbox" class="rounded border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <span class="mx-2 text-gray-600 text-sm">{{ __('Remember Me') }}</span>
+                        <input type="checkbox" class="border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <span class="mx-2 text-sm text-gray-600">{{ __('Remember Me') }}</span>
                     </label>
                 </div>
 

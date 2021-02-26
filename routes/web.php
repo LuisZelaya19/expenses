@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ExpenseCategoryController;
 use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\IncomeCategoryController;
+use App\Http\Controllers\Admin\IncomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +36,8 @@ Route::group([
     Route::redirect('/', '/admin/expenses');
     Route::redirect('/home', '/admin/expenses');
 
-    //Expenses - Gastos
     Route::resource('expenses', ExpenseController::class);
+    Route::resource('incomes', IncomeController::class);
+    Route::resource('expenseCategories', ExpenseCategoryController::class);
+    Route::resource('incomeCategories', IncomeCategoryController::class);
 });

@@ -28,7 +28,9 @@ class StoreExpenseRequest extends FormRequest
                 'required'
             ],
             'amount' => [
-                'required'
+                'required',
+                'numeric',
+                'regex:/^\d+(\.\d{1,2})?$/'
             ],
             'entry_date' => [
                 'required'

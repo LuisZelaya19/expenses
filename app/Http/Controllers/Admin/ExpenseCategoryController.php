@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExpenseCategoryRequest;
 use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ExpenseCategoryController extends Controller
 {
@@ -15,7 +17,15 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        //
+        if (request()->ajax()) {
+            $expenseCategory =  ExpenseCategory::select(['id', 'name']);
+
+            return DataTables::of($expenseCategory)
+                ->addColumn('action', 'admin.expenseCategories.action')
+                ->make(true);
+        }
+
+        return view('admin.expenseCategories.index');
     }
 
     /**
@@ -25,7 +35,7 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.expenseCategories.create');
     }
 
     /**
@@ -34,9 +44,11 @@ class ExpenseCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreExpenseCategoryRequest $request)
     {
-        //
+        ExpenseCategory::create($request->validated());
+
+        return redirect()->route('expenseCategories.index');
     }
 
     /**

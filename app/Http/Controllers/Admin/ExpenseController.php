@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use Yajra\DataTables\DataTables;
 
 //use Illuminate\Http\Request;
 
@@ -18,6 +19,16 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            $expenses = Expense::select(['id', 'name', 'entry_date', 'amount'])->orderBy('entry_date', 'DESC');
+
+            return DataTables::of($expenses)
+                ->addColumn('action', 'admin.expenses.action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
         return view('admin.expenses.index');
     }
 
@@ -40,7 +51,7 @@ class ExpenseController extends Controller
     public function store(StoreExpenseRequest $request)
     {
         Expense::create($request->validated());
-        return view('admin.expenses.index')->with('success', 'Gasto registrado exitosamente');
+        return redirect()->route('expenses.index')->withToastSuccess('Gasto guardado exitosamente');
     }
 
     /**
@@ -62,7 +73,7 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        //
+        return view('admin.expenses.edit', ['expense' => $expense]);
     }
 
     /**
@@ -74,7 +85,9 @@ class ExpenseController extends Controller
      */
     public function update(UpdateExpenseRequest $request, Expense $expense)
     {
-        //
+        $expense->update($request->validated());
+
+        return redirect()->route('expenses.index');
     }
 
     /**

@@ -11,13 +11,16 @@
         <span class="text-lg font-medium">Control de gastos</span>
     </div>
     <div class="card-body">
-        <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+        <table class="stripe hover expense_table" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
             <thead>
                 <tr>
-                    <td>Nombre</td>
+                    <td>Gasto</td>
                     <td>Fecha</td>
-                    <td></td>
+                    <td>Cantidad</td>
+                    <td>Acciones</td>
                 </tr>
+            </thead>
+            <tbody></tbody>
         </table>
     </div>
 </div>
@@ -26,9 +29,74 @@
 <script>
     $(document).ready(function() {
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-        let table = $('#example').DataTable({
-                responsive: true,
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on('click', '.delete', function() {
+
+            let id = $(this).attr('id');
+            let url = "expenses/destroy/" + id;
+
+            Swal.fire({
+                title: 'Desea eliminar el registro?',
+                text: "Este proceso no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, deseo eliminar el dato!'
+            }).then((result) => {
+                if (result.value) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(data) {
+
+                            Swal.fire('Eliminado!', 'El registro fue eliminado.', 'success');
+
+                        }
+                    });
+                }
             })
+        });
+
+        let table = $('.expense_table').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                buttons: dtButtons,
+                url: "{{route('expenses.index')}}",
+                type: "POST",
+                columns: [{
+                        data: "name",
+                        name: "name"
+                    },
+                    {
+                        data: "entry_date",
+                        name: "entry_date"
+                    },
+                    {
+                        data: "amount",
+                        name: "amount",
+                        searchable: false
+                    },
+                    {
+                        data: "action",
+                        name: "action",
+                        searchable: false,
+                        orderable: false
+                    }
+                ],
+            })
+            .columns.adjust()
             .responsive.recalc();
     });
 </script>
