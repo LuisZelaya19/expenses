@@ -15,7 +15,8 @@ class CreatePermissionRolePivotTable extends Migration
     {
         Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('permission_id')->constrained('permissions');
+            $table->foreignId('role_id')->constrained('roles');
         });
     }
 

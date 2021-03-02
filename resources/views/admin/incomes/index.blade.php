@@ -40,7 +40,7 @@
                 serverSide: true,
                 responsive: true,
                 buttons: dtButtons,
-                url: "{{route('incomes.index')}}",
+                ajax: "{{route('incomes.index')}}",
                 type: "POST",
                 columns: [{
                         data: "name",

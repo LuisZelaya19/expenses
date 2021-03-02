@@ -38,7 +38,7 @@
                 serverSide: true,
                 responsive: true,
                 buttons: dtButtons,
-                url: "{{route('expenseCategories.index')}}",
+                ajax: "{{route('expenseCategories.index')}}",
                 type: "POST",
                 columns: [{
                     data: "name",

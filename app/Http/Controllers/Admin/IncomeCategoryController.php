@@ -21,6 +21,8 @@ class IncomeCategoryController extends Controller
             $incomeCategory = IncomeCategory::select(['id', 'name']);
 
             return DataTables::of($incomeCategory)
+                ->addColumn('action', 'admin.incomeCategories.action')
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view('admin.incomeCategories.index');

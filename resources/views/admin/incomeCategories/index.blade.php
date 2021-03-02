@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <td>Ingreso</td>
+                    <td>Acciones</td>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -37,11 +38,16 @@
                 serverSide: true,
                 responsive: true,
                 buttons: dtButtons,
-                url: "{{route('incomeCategories.index')}}",
+                ajax: "{{route('incomeCategories.index')}}",
                 type: "POST",
                 columns: [{
                     data: "name",
                     name: "name"
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
                 }],
             })
             .columns.adjust()

@@ -34,6 +34,15 @@
                 </span>
                 @endif
             </label>
+            <label for="expense_category_id" class="block mt-2">
+                <span class="text-gray-700">Tipo de gasto</span>
+                <select name="expense_category_id" class="select2 form-select" id="expense_category_id">
+                    <option value="">test</option>
+                    <option value="">test 1</option>
+                    <option value="">test 2</option>
+                    <option value="">prueba 1</option>
+                </select>
+            </label>
             <label for="description" class="block mt-2">
                 <span class="text-gray-700">Descripcion</span>
                 <textarea name="description" id="description" class="form-input" rows="8" cols="40"></textarea>

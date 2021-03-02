@@ -59,9 +59,7 @@
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(data) {
-
                             Swal.fire('Eliminado!', 'El registro fue eliminado.', 'success');
-
                         }
                     });
                 }
@@ -73,24 +71,25 @@
                 serverSide: true,
                 responsive: true,
                 buttons: dtButtons,
-                url: "{{route('expenses.index')}}",
+                ajax: "{{route('expenses.index')}}",
+                dataType: 'json',
                 type: "POST",
                 columns: [{
-                        data: "name",
-                        name: "name"
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        data: "entry_date",
-                        name: "entry_date"
+                        data: 'entry_date',
+                        name: 'entry_date'
                     },
                     {
-                        data: "amount",
-                        name: "amount",
+                        data: 'amount',
+                        name: 'amount',
                         searchable: false
                     },
                     {
-                        data: "action",
-                        name: "action",
+                        data: 'action',
+                        name: 'action',
                         searchable: false,
                         orderable: false
                     }

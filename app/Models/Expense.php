@@ -18,7 +18,8 @@ class Expense extends Model
         'description',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'expense_category_id'
     ];
 
     protected $dates = [

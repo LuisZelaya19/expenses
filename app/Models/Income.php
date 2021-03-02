@@ -18,7 +18,8 @@ class Income extends Model
         'description',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'income_category_id'
     ];
 
     protected $dates = [
