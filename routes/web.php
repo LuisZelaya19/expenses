@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\ExpenseCategoryController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\IncomeCategoryController;
 use App\Http\Controllers\Admin\IncomeController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +42,6 @@ Route::group([
     Route::resource('incomes', IncomeController::class);
     Route::resource('expenseCategories', ExpenseCategoryController::class);
     Route::resource('incomeCategories', IncomeCategoryController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
 });

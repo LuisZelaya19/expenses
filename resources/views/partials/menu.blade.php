@@ -17,11 +17,11 @@
                         <span><i class="fas fa-users"></i> Usuarios
                         </span>
                     </a>
-                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="#">
+                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="{{route('roles.index')}}">
                         <span><i class="fas fa-briefcase"></i> Roles
                         </span>
                     </a>
-                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="#">
+                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="{{route('permissions.index')}}">
                         <span><i class="fas fa-user-lock"></i> Permisos
                         </span>
                     </a>

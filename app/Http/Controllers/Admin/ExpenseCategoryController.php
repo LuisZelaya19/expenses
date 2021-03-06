@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseCategoryRequest;
+use App\Http\Requests\UpdateExpenseCategoryRequest;
 use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -70,7 +71,7 @@ class ExpenseCategoryController extends Controller
      */
     public function edit(ExpenseCategory $expenseCategory)
     {
-        //
+        return view('admin.expenseCategories.edit', compact('expenseCategory'));
     }
 
     /**
@@ -80,9 +81,11 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
     {
-        //
+        $expenseCategory->update($request->validated());
+
+        return redirect()->route('expenseCategories.index')->withSuccess('Categoria de gasto editada exitosamente');
     }
 
     /**

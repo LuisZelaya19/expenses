@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIncomeCategoryRequest;
+use App\Http\Requests\UpdateIncomeCategoryRequest;
 use App\Models\IncomeCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -70,7 +71,7 @@ class IncomeCategoryController extends Controller
      */
     public function edit(IncomeCategory $incomeCategory)
     {
-        //
+        return view('admin.incomeCategories.edit', compact('incomeCategory'));
     }
 
     /**
@@ -80,9 +81,11 @@ class IncomeCategoryController extends Controller
      * @param  \App\Models\IncomeCategory  $incomeCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IncomeCategory $incomeCategory)
+    public function update(UpdateIncomeCategoryRequest $request, IncomeCategory $incomeCategory)
     {
-        //
+        $incomeCategory->update($request->validated());
+
+        return redirect()->route('incomeCategories.index')->withSuccess('Categoria de ingreso editada exitosamente');
     }
 
     /**
