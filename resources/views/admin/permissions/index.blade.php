@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <td>Permiso</td>
+                    <td>Modulo</td>
                     <td>Descripcion</td>
                     <td>Acciones</td>
                 </tr>
@@ -75,6 +76,10 @@
                 columns: [{
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'permission_group',
+                        name: 'permission_group'
                     },
                     {
                         data: 'description',

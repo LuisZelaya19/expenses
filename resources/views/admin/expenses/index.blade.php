@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-{{--<h3 class="text-3xl font-medium text-gray-700">Gastos</h3>--}}
 <div class="mb-4 grid justify-items-end">
     <a class="btn btn-primary" href="{{route('expenses.create')}}">
         <i class="fas fa-plus"></i> Nuevo

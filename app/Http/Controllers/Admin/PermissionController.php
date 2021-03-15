@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use App\Models\Permission;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class PermissionController extends Controller

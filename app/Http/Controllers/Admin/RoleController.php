@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -36,7 +37,17 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        $permission_groups = Permission::select('permission_group')->groupBy('permission_group')->get();
+
+        $permissions = [];
+
+        foreach ($permission_groups as $key => $groups) {
+            $permissions['data'][$key] = Permission::select('id', 'name', 'description')->where('permission_group', $groups->permission_group)->get();
+        }
+
+        collect($permissions)->toArray();
+
+        return view('admin.roles.create', compact('permission_groups', 'permissions'));
     }
 
     /**

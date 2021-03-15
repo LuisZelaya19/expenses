@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use Yajra\DataTables\DataTables;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
@@ -39,7 +40,9 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        return view('admin.expenses.create');
+        $expense_categories =  ExpenseCategory::all()->pluck('name', 'id');
+
+        return view('admin.expenses.create', compact('expense_categories'));
     }
 
     /**
@@ -48,10 +51,11 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreExpenseRequest $request)
+    public function store(Request $request)
     {
-        Expense::create($request->validated());
-        return redirect()->route('expenses.index')->withToastSuccess('Gasto guardado exitosamente');
+        dd($request->all());
+        //Expense::create($request->validated());
+        //return redirect()->route('expenses.index')->withToastSuccess('Gasto guardado exitosamente');
     }
 
     /**

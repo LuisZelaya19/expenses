@@ -27,6 +27,9 @@ class StorePermissionRequest extends FormRequest
             'name' => [
                 'required'
             ],
+            'permission_group' => [
+                'required'
+            ],
             'description' => []
         ];
     }
