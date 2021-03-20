@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class AddRelationshipFieldsToPermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->foreignId('module_id')->constrained();
         });
     }
 
@@ -29,6 +25,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::table('permissions', function (Blueprint $table) {
+            //
+        });
     }
 }

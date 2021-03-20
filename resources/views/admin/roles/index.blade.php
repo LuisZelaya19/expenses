@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <td>Rol</td>
+                    <td>Permisos</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -74,6 +75,10 @@
                 columns: [{
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'permissions',
+                        name: 'permissions'
                     },
                     {
                         data: 'action',

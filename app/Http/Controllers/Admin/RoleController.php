@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Models\Module;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -20,11 +21,16 @@ class RoleController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $roles =  Role::select('id', 'name');
+            $roles =  Role::with('permissions')->select('roles.*');
 
             return DataTables::of($roles)
+                ->addColumn('permissions', function (Role $role) {
+                    return $role->permissions->map(function ($permissions) {
+                        return '<span class="text-white badge bg-primary">' . $permissions->name . '</span>';
+                    })->implode(' ');
+                })
                 ->addColumn('action', 'admin.roles.action')
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'permissions'])
                 ->make(true);
         }
         return view('admin.roles.index');
@@ -37,17 +43,17 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission_groups = Permission::select('permission_group')->groupBy('permission_group')->get();
+        $modules = Module::select('id', 'name')->get();
 
         $permissions = [];
 
-        foreach ($permission_groups as $key => $groups) {
-            $permissions['data'][$key] = Permission::select('id', 'name', 'description')->where('permission_group', $groups->permission_group)->get();
+        foreach ($modules as $key => $module) {
+            $permissions['data'][$key] = Permission::select('id', 'name', 'description')->where('module_id', $module->id)->get();
         }
 
         collect($permissions)->toArray();
 
-        return view('admin.roles.create', compact('permission_groups', 'permissions'));
+        return view('admin.roles.create', compact('modules', 'permissions'));
     }
 
     /**
@@ -58,7 +64,9 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        Role::create($request->validated());
+        $role = Role::create($request->validated());
+
+        $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('roles.index')->withSuccess('Rol agregado exitosamente');
     }
@@ -82,7 +90,17 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.roles.edit', compact('role'));
+        $modules = Module::select('id', 'name')->get();
+
+        $permissions = [];
+
+        foreach ($modules as $key => $module) {
+            $permissions['data'][$key] = Permission::select('id', 'name', 'description')->where('module_id', $module->id)->get();
+        }
+
+        collect($permissions)->toArray();
+
+        return view('admin.roles.edit', compact('role', 'modules', 'permissions'));
     }
 
     /**

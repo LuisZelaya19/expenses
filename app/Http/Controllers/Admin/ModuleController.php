@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreModuleRequest;
+use App\Http\Requests\UpdateModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ModuleController extends Controller
 {
@@ -15,7 +18,16 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        //
+        $modules =  Module::all('id', 'name');
+
+        if (request()->ajax()) {
+            return DataTables::of($modules)
+                ->addColumn('action', 'admin.modules.action')
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.modules.index');
     }
 
     /**
@@ -25,7 +37,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.modules.create');
     }
 
     /**
@@ -34,9 +46,11 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreModuleRequest $request)
     {
-        //
+        Module::create($request->validated());
+
+        return redirect()->route('modules.index')->withSuccess('Modulo registrado exitosamente');
     }
 
     /**
@@ -58,7 +72,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        //
+        return view('admin.modules.edit', compact('module'));
     }
 
     /**
@@ -68,9 +82,11 @@ class ModuleController extends Controller
      * @param  \App\Models\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Module $module)
+    public function update(UpdateModuleRequest $request, Module $module)
     {
-        //
+        $module->update($request->validated());
+
+        return redirect()->route('modules.index')->withSuccess('Modulo editado exitosamente');
     }
 
     /**

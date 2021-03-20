@@ -12,12 +12,17 @@ class Permission extends Model
 
     protected $fillable = [
         'name',
-        'permission_group',
-        'description'
+        'description',
+        'module_id'
     ];
 
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
     }
 }

@@ -8,7 +8,9 @@
             <div x-data="collapse()">
                 <div class="flex items-center justify-between px-4 py-3 cursor-pointer transition group hover:bg-gray-800 hover:text-gray-200" role="button" x-spread="trigger">
                     <div class="flex items-center">
-                        <span><i class="fas fa-users-cog"></i> Administracion de usuarios</span>
+                        <span>
+                            <i class="fas fa-users-cog"></i> Administracion de usuarios
+                        </span>
                     </div>
                     <i class="fas fa-angle-right" :class="{'fa-rotate-90': open}"></i>
                 </div>
@@ -24,6 +26,9 @@
                     <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="{{route('permissions.index')}}">
                         <span><i class="fas fa-user-lock"></i> Permisos
                         </span>
+                    </a>
+                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" href="{{route('modules.index')}}">
+                        <span> Modulos</span>
                     </a>
                 </div>
             </div>

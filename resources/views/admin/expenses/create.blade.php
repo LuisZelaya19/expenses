@@ -13,7 +13,7 @@
             </label>
             @if ($errors->has('name'))
             <span class="mt-1 text-sm text-red-600">
-                {{$errors->first('name')}}
+                {{$errors->frst('name')}}
             </span>
             @endif
             <label for="amount" class="block mt-2">

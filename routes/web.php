@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ExpenseCategoryController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\IncomeCategoryController;
 use App\Http\Controllers\Admin\IncomeController;
+use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,6 @@ Auth::routes();
 
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin/expenses');
-//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group([
     'prefix' => 'admin',
@@ -44,4 +44,5 @@ Route::group([
     Route::resource('incomeCategories', IncomeCategoryController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
+    Route::resource('modules', ModuleController::class);
 });

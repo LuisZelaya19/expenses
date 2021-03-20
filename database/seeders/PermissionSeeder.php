@@ -17,78 +17,153 @@ class PermissionSeeder extends Seeder
         $permissions = [
             [
                 'name' => 'user_access',
-                'permission_group' => 'Usuario',
-                'description' => 'Acceder al listado de usuarios'
+                'description' => 'Acceder al listado de usuarios',
+                'module_id' => 1,
             ],
             [
                 'name' => 'user_create',
-                'permission_group' => 'Usuario',
-                'description' => 'Crear nuevos usuarios'
+                'description' => 'Crear nuevos usuarios',
+                'module_id' => 1
             ],
             [
                 'name' => 'user_edit',
-                'permission_group' => 'Usuario',
-                'description' => 'Editar usuarios'
+                'description' => 'Editar usuarios',
+                'module_id' => 1
             ],
             [
                 'name' => 'user_view',
-                'permission_group' => 'Usuario',
-                'description' => 'Ver detalles del usuario'
+                'description' => 'Ver detalles del usuario',
+                'module_id' => 1
             ],
             [
                 'name' => 'user_delete',
-                'permission_group' => 'Usuario',
-                'description' => 'Eliminar usuarios'
+                'description' => 'Eliminar usuarios',
+                'module_id' => 1
             ],
             [
                 'name' => 'role_access',
-                'permission_group' => 'Roles',
-                'description' => 'Acceder al listado de roles'
+                'description' => 'Acceder al listado de roles',
+                'module_id' => 2
             ],
             [
                 'name' => 'role_create',
-                'permission_group' => 'Roles',
-                'description' => 'Crear nuevo rol'
+                'description' => 'Crear nuevo rol',
+                'module_id' => 2
             ],
             [
                 'name' => 'role_edit',
-                'permission_group' => 'Roles',
-                'description' => 'Editar roles'
+                'description' => 'Editar roles',
+                'module_id' => 2
             ],
             [
                 'name' => 'role_view',
-                'permission_group' => 'Roles',
-                'description' => 'Ver detalles del rol'
+                'description' => 'Ver detalles del rol',
+                'module_id' => 2
             ],
             [
                 'name' => 'role_delete',
-                'permission_group' => 'Roles',
-                'description' => 'Eliminar rol'
+                'description' => 'Eliminar rol',
+                'module_id' => 2
             ],
             [
                 'name' => 'permission_access',
-                'permission_group' => 'Permisos',
-                'description' => 'Acceder al listado de permisos'
+                'description' => 'Acceder al listado de permisos',
+                'module_id' => 3
             ],
             [
                 'name' => 'permission_create',
-                'permission_group' => 'Permisos',
-                'description' => 'Crear nuevo permiso'
+                'description' => 'Crear nuevo permiso',
+                'module_id' => 3
             ],
             [
                 'name' => 'permission_edit',
-                'permission_group' => 'Permisos',
-                'description' => 'Editar permisos'
+                'description' => 'Editar permisos',
+                'module_id' => 3
             ],
             [
                 'name' => 'permission_view',
-                'permission_group' => 'Permisos',
-                'description' => 'Ver detalles del permiso'
+                'description' => 'Ver detalles del permiso',
+                'module_id' => 3
             ],
             [
                 'name' => 'permission_delete',
-                'permission_group' => 'Permisos',
-                'description' => 'Eliminar permiso'
+                'description' => 'Eliminar permiso',
+                'module_id' => 3
+            ],
+            [
+                'name' => 'module_access',
+                'description' => 'Acceder al listado de modulos',
+                'module_id' => 4,
+            ],
+            [
+                'name' => 'module_create',
+                'description' => 'Crear nuevos modulos',
+                'module_id' => 4
+            ],
+            [
+                'name' => 'module_edit',
+                'description' => 'Editar modulos',
+                'module_id' => 4
+            ],
+            [
+                'name' => 'module_view',
+                'description' => 'Ver detalles del modulo',
+                'module_id' => 4
+            ],
+            [
+                'name' => 'module_delete',
+                'description' => 'Eliminar modulos',
+                'module_id' => 4
+            ],
+            [
+                'name' => 'income_access',
+                'description' => 'Acceder al listado de ingresos',
+                'module_id' => 5,
+            ],
+            [
+                'name' => 'income_create',
+                'description' => 'Crear nuevo ingeso',
+                'module_id' => 5
+            ],
+            [
+                'name' => 'income_edit',
+                'description' => 'Editar ingreso',
+                'module_id' => 5
+            ],
+            [
+                'name' => 'income_view',
+                'description' => 'Ver detalles del ingreso',
+                'module_id' => 5
+            ],
+            [
+                'name' => 'income_delete',
+                'description' => 'Eliminar ingreso',
+                'module_id' => 5
+            ],
+            [
+                'name' => 'expense_access',
+                'description' => 'Acceder al listado de gastos',
+                'module_id' => 6
+            ],
+            [
+                'name' => 'expense_create',
+                'description' => 'Crear nuevo gasto',
+                'module_id' => 6
+            ],
+            [
+                'name' => 'expense_edit',
+                'description' => 'Editar gasto',
+                'module_id' => 6
+            ],
+            [
+                'name' => 'expense_view',
+                'description' => 'Ver detalles del gasto',
+                'module_id' => 6
+            ],
+            [
+                'name' => 'expense_delete',
+                'description' => 'Eliminar gasto',
+                'module_id' => 6
             ],
         ];
 
