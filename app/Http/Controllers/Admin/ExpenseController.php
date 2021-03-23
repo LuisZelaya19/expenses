@@ -7,9 +7,10 @@ use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
-use Yajra\DataTables\DataTables;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\DataTables;
 
 class ExpenseController extends Controller
 {
@@ -20,10 +21,15 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+        //abort_if(Gate::denies('expense_access'), Response::HTTP_FORBIDDEN, '403 Acceso Prohibido');
+
         if (request()->ajax()) {
-            $expenses = Expense::select(['id', 'name', 'entry_date', 'amount'])->orderBy('entry_date', 'DESC');
+            $expenses = Expense::with('expense_category')->select('expenses.*')->orderBy('entry_date', 'DESC');
 
             return DataTables::of($expenses)
+                ->addColumn('expense', function (Expense $expense) {
+                    return $expense->expense_category->name;
+                })
                 ->addColumn('action', 'admin.expenses.action')
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -40,6 +46,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
+        //abort_if(Gate::denies('expense_create'), Response::HTTP_FORBIDDEN, '403 Acceso Prohibido');
+
         $expense_categories =  ExpenseCategory::all()->pluck('name', 'id');
 
         return view('admin.expenses.create', compact('expense_categories'));
@@ -51,11 +59,11 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreExpenseRequest $request)
     {
-        dd($request->all());
-        //Expense::create($request->validated());
-        //return redirect()->route('expenses.index')->withToastSuccess('Gasto guardado exitosamente');
+        Expense::create($request->validated());
+
+        return redirect()->route('expenses.index')->withToastSuccess('Gasto guardado exitosamente');
     }
 
     /**
@@ -77,7 +85,9 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        return view('admin.expenses.edit', ['expense' => $expense]);
+        $expense_categories = ExpenseCategory::all()->pluck('name', 'id');
+
+        return view('admin.expenses.edit', compact('expense', 'expense_categories'));
     }
 
     /**

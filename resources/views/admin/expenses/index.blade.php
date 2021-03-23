@@ -14,8 +14,9 @@
 			<thead>
 				<tr>
 					<td>Gasto</td>
+					<td>Monto</td>
 					<td>Fecha</td>
-					<td>Cantidad</td>
+					<td>Descripcion</td>
 					<td>Acciones</td>
 				</tr>
 			</thead>
@@ -35,35 +36,6 @@
 			}
 		});
 
-		$(document).on('click', '.delete', function() {
-
-			let id = $(this).attr('id');
-			let url = "expenses/destroy/" + id;
-
-			Swal.fire({
-				title: 'Desea eliminar el registro?',
-				text: "Este proceso no se puede revertir!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3086d6',
-				cancelButtonColor: '#d34',
-				confirmButtonText: 'Si, deseo eliminar el dato!'
-			}).then((result) => {
-				if (result.value) {
-
-					$.ajax({
-						type: "POST",
-						url: url,
-						data: {
-							"_token": "{{ csrf_token() }}"
-						},
-						success: function(data) {
-							Swal.fire('Eliminado!', 'El registro fue eliminado.', 'success');
-						}
-					});
-				}
-			})
-		});
 
 		let table = $('.expense_table').DataTable({
 				processing: true,
@@ -74,16 +46,21 @@
 				dataType: 'json',
 				type: "POST",
 				columns: [{
-						data: 'name',
-						name: 'name'
+						data: 'expense',
+						name: 'expense'
+					},
+					{
+						data: 'amount',
+						name: 'amount',
+						searchable: false
 					},
 					{
 						data: 'entry_date',
 						name: 'entry_date'
 					},
 					{
-						data: 'amount',
-						name: 'amount',
+						data: 'description',
+						name: 'description',
 						searchable: false
 					},
 					{

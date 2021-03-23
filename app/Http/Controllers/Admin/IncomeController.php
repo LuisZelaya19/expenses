@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIncomeRequest;
+use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\Income;
+use App\Models\IncomeCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -18,9 +20,12 @@ class IncomeController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $incomes = Income::select(['id', 'name', 'entry_date', 'amount'])->orderBy('entry_date', 'DESC');
+            $incomes = Income::with('income_category')->select('incomes.*');
 
             return DataTables::of($incomes)
+                ->addColumn('income', function (Income $income) {
+                    return $income->income_category->name;
+                })
                 ->addColumn('action', 'admin.incomes.action')
                 ->rawColumns(['action'])
                 ->make(true);
@@ -36,7 +41,9 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        return view('admin.incomes.create');
+        $income_categories = IncomeCategory::all()->pluck('name', 'id');
+
+        return view('admin.incomes.create', compact('income_categories'));
     }
 
     /**
@@ -48,6 +55,7 @@ class IncomeController extends Controller
     public function store(StoreIncomeRequest $request)
     {
         Income::create($request->validated());
+
         return redirect()->route('incomes.index');
     }
 
@@ -70,7 +78,9 @@ class IncomeController extends Controller
      */
     public function edit(Income $income)
     {
-        return view('admin.incomes.edit', compact('income'));
+        $income_categories = IncomeCategory::all()->pluck('name', 'id');
+
+        return view('admin.incomes.edit', compact('income', 'income_categories'));
     }
 
     /**
@@ -80,9 +90,11 @@ class IncomeController extends Controller
      * @param  \App\Models\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Income $income)
+    public function update(UpdateIncomeRequest $request, Income $income)
     {
-        //
+        $income->update($request->validated());
+
+        return redirect()->route('incomes.index')->withToastSuccess('Ingreso editado exitosamente');
     }
 
     /**

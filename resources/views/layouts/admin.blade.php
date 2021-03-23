@@ -99,20 +99,11 @@
             let selectAllButtonTrans = 'Seleccionar todo'
             let selectNoneButtonTrans = 'Deseleccionar todo'
 
-            //let languages = {
-            //'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/english.json'
-            //};
-
             $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
                 className: 'btn btn-sm'
             })
 
             $.extend(true, $.fn.dataTable.defaults, {
-                //language: {
-                //url: languages['{{ app()->getLocale() }}']
-                //},
-                //order: [],
-                //scrollX: true,
                 pageLength: 100,
                 dom: 'lBfrtip<"actions">',
                 buttons: [{

@@ -13,9 +13,10 @@
         <table class="stripe hover income_table" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
             <thead>
                 <tr>
-                    <td>Gasto</td>
+                    <td>Ingreso</td>
+                    <td>Monto</td>
                     <td>Fecha</td>
-                    <td>Cantidad</td>
+                    <td>Descripcion</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -43,16 +44,21 @@
                 ajax: "{{route('incomes.index')}}",
                 type: "POST",
                 columns: [{
-                        data: "name",
-                        name: "name"
+                        data: "income",
+                        name: "income"
+                    },
+                    {
+                        data: "amount",
+                        name: "amount",
+                        searchable: false
                     },
                     {
                         data: "entry_date",
                         name: "entry_date"
                     },
                     {
-                        data: "amount",
-                        name: "amount",
+                        data: "description",
+                        name: "description",
                         searchable: false
                     },
                     {

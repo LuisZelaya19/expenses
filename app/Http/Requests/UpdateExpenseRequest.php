@@ -24,9 +24,6 @@ class UpdateExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required'
-            ],
             'amount' => [
                 'required',
                 'numeric',
@@ -35,7 +32,21 @@ class UpdateExpenseRequest extends FormRequest
             'entry_date' => [
                 'required'
             ],
+            'expense_category_id' => [
+                'required'
+            ],
             'description' => []
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'expense_category_id.required' =>  'tipo de gasto es obligatorio',
+            'amount.required' => 'el monto es obligatorio',
+            'amount.numeric' => 'el monto debe ser un valor numerico',
+            'amount.regex' => 'el monto debe contener una parte entera y/o una decimal con maximo 2 decimales',
+            'entry_date.required' => 'la fecha del gasto es obligatoria'
         ];
     }
 }

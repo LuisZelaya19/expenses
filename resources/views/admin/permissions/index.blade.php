@@ -34,35 +34,6 @@
             }
         });
 
-        $(document).on('click', '.delete', function() {
-
-            let id = $(this).attr('id');
-            let url = "expenses/destroy/" + id;
-
-            Swal.fire({
-                title: 'Desea eliminar el registro?',
-                text: "Este proceso no se puede revertir!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, deseo eliminar el dato!'
-            }).then((result) => {
-                if (result.value) {
-
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: {
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        success: function(data) {
-                            Swal.fire('Eliminado!', 'El registro fue eliminado.', 'success');
-                        }
-                    });
-                }
-            })
-        });
 
         let table = $('.permission_table').DataTable({
                 processing: true,

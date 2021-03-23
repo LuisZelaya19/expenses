@@ -24,15 +24,15 @@ class StoreIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required'
-            ],
             'amount' => [
                 'required',
                 'numeric',
                 'regex:/^\d+(\.\d{1,2})?$/'
             ],
             'entry_date' => [
+                'required'
+            ],
+            'income_category_id' => [
                 'required'
             ],
             'description' => []
