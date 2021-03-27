@@ -92,6 +92,8 @@ class RoleController extends Controller
     {
         $modules = Module::select('id', 'name')->get();
 
+        $role->load('permissions');
+
         $permissions = [];
 
         foreach ($modules as $key => $module) {
@@ -113,6 +115,8 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, Role $role)
     {
         $role->update($request->validated());
+
+        $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('roles.index')->withSuccess('Rol editado exitosamente');
     }

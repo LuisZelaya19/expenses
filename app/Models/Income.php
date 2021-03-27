@@ -16,9 +16,6 @@ class Income extends Model
         'amount',
         'entry_date',
         'description',
-        'created_at',
-        'updated_at',
-        'deleted_at',
         'income_category_id'
     ];
 

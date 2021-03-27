@@ -14,7 +14,7 @@
                     <i class="fas fa-angle-right" :class="{'fa-rotate-90': open}"></i>
                 </div>
                 <div class="mb-4" x-spread="collapse" x-cloak>
-                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" {{request()->is('admin/users*') ? 'bg-gray-800 text-gray-200' : ''}} href="#">
+                    <a class="flex items-center py-2 pl-12 pr-4 cursor-pointer transition hover:bg-gray-800 hover:text-gray-200" {{request()->is('admin/users*') ? 'bg-gray-800 text-gray-200' : ''}} href="{{route('users.index')}}">
                         <span><i class="fas fa-users"></i> Usuarios
                         </span>
                     </a>
