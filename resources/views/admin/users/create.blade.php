@@ -1,71 +1,71 @@
 @extends('layouts.admin')
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <span class="text-lg font-medium">Registrar rol</span>
-        <em>(* Campos obligatorios)</em>
-    </div>
-    <div class="card-body">
-        <form action="{{route('roles.store')}}" method="post">
-            @csrf
-            <label for="name" class="block mt-3 required">
-                <span class="text-gray-700">Rol</span>
-            </label>
-            <input id="name" name="name" class="{{ $errors->has('name') ? 'bg-red-100 ': ' ' }} block w-full mt-1 form-input" placeholder="Ingrese el nombre del rol" value="{{old('name', '')}}">
-            @if ($errors->has('name'))
-            <span class="mt-1 text-sm text-red-600">
-                {{$errors->first('name')}}
-            </span>
-            @endif
-            <h3 class="mt-4 mb-2 text-lg font-medium text-center">
-                Listado de permisos
-            </h3>
-            <div x-data="selectCheckboxes()">
-                <input type="checkbox" name="selectAll" id="selectAll" class="form-checkbox" @click="toggleAllCheckboxes">
-                <span class="ml-2 cursor-pointer">Seleccionar todo</span>
-                <hr class="mt-2">
-                <label for="permissions" class="block mt-2">
-                </label>
-                @foreach ($modules as $key => $module)
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
-                        <label for="modules" class="flex items-center">
-                            <span class="ml-2 cursor-pointer">{{$module->name}}</span>
-                        </label>
-                    </div>
-                    <div class="col-span-9">
-                        @foreach ($permissions['data'][$key] as $permission)
-                        <label for="permissions" class="flex items-center mt-2 mb-2">
-                            <input type="checkbox" id="permission{{$permission->id}}" class="form-checkbox" name="permissions[]" value="{{$permission['id']}}">
-                            <span class="ml-2 cursor-pointer"> {{$permission['description']}}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                </div>
-                <hr class="mt-2 mb-2">
-                @endforeach
-            </div>
-    </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
-    </div>
-</div>
-@endsection
-@section('scripts')
-<script>
-    function selectCheckboxes() {
-        return {
-            checked: false,
-            toggleAllCheckboxes: function() {
-                this.checked = !this.checked;
+	<div class="card-header">
+		<span class="text-lg font-medium">Registrar usuario</span>
+		<em><span class="text-red-500">*</span> Campos obligatorios</em>
+	</div>
+	<div class="card-body">
+		<form action="{{route('users.store')}}" method="post">
+			@csrf
+			<label for="name" class="block mt-2 required">
+				<span class="text-gray-700">{{__('Nombre')}}</span>
+			</label>
+			<input id="name" name="name" class="{{ $errors->has('name') ? 'bg-red-100 ': ' ' }} block w-full mt-1 form-input" placeholder="Ingrese el nombre del rol" value="{{old('name', '')}}" required>
+			@if ($errors->has('name'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('name')}}
+			</span>
+			@endif
 
-                checkboxes = document.querySelectorAll('[id^=permission], [id^=module]');
-                [...checkboxes].map((element) => {
-                    element.checked = this.checked;
-                })
-            }
-        }
-    }
-</script>
+			<label for="email" class="block mt-2 required">
+				<span class="text-gray-700">{{ __('E-Mail') }}</span>
+			</label>
+			<input id="email" type="email" class="{{ $errors->has('name') ? 'bg-red-100 ': ' ' }} block w-full mt-1 form-input" name="email" value="{{ old('email') }}" required>
+			@if ($errors->has('email'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('email')}}
+			</span>
+			@endif
+
+			<label for="password" class="block mt-2 required">
+				<span class="text-gray-700">{{ __('Password') }}</span>
+			</label>
+			<input id="password" type="password" class="form-input" name="password" required>
+			@if ($errors->has('password'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('password')}}
+			</span>
+			@endif
+
+			<label for="password_confirmation" class="block mt-2 required">
+				<span class="text-gray-700">{{ __('Confirmar Password') }}</span>
+			</label>
+			<input id="password-confirm" type="password" class="form-input" name="password_confirmation" required>
+			@if ($errors->has('password_confirmation'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('password_confirmation')}}
+			</span>
+			@endif
+
+			<label for="roles" class="block mt-2 required">
+				<span class="text-gray-700">{{__('Roles')}}</span>
+			</label>
+			<select name="roles[]" class="select2" multiple>
+				<option value="">Seleccione</option>
+				@foreach ($roles as $id => $role)
+				<option value="{{$id}}">{{$role}}</option>
+				@endforeach
+			</select>
+			@if ($errors->has('roles'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('roles')}}
+			</span>
+			@endif
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-primary">Registrar</button>
+		</form>
+	</div>
+</div>
 @endsection

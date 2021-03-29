@@ -165,6 +165,56 @@ class PermissionSeeder extends Seeder
                 'description' => 'Eliminar gasto',
                 'module_id' => 6
             ],
+            [
+                'name' => 'expense_category_access',
+                'description' => 'Acceder al listado de categorías de gastos',
+                'module_id' => 7
+            ],
+            [
+                'name' => 'expense_category_create',
+                'description' => 'Crear nueva categoría de gasto',
+                'module_id' => 7
+            ],
+            [
+                'name' => 'expense_category_edit',
+                'description' => 'Editar categoría de gasto',
+                'module_id' => 7
+            ],
+            [
+                'name' => 'expense_category_view',
+                'description' => 'Ver detalles de la categoría de gasto',
+                'module_id' => 7
+            ],
+            [
+                'name' => 'expense_category_delete',
+                'description' => 'Eliminar categoría de gasto',
+                'module_id' => 7
+            ],
+            [
+                'name' => 'income_category_access',
+                'description' => 'Acceder al listado de categorías de ingresos',
+                'module_id' => 8
+            ],
+            [
+                'name' => 'income_category_create',
+                'description' => 'Crear nueva categoría de ingresos',
+                'module_id' => 8
+            ],
+            [
+                'name' => 'income_category_edit',
+                'description' => 'Editar categoría de ingreso',
+                'module_id' => 8
+            ],
+            [
+                'name' => 'income_category_view',
+                'description' => 'Ver detalles de la categoría de ingreso',
+                'module_id' => 8
+            ],
+            [
+                'name' => 'income_category_delete',
+                'description' => 'Eliminar categoría de ingreso',
+                'module_id' => 8
+            ],
         ];
 
         foreach ($permissions as $permission) {

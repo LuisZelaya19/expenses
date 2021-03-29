@@ -32,6 +32,12 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'name' => 'Gastos',
+            ],
+            [
+                'name' => 'Categoría de gastos'
+            ],
+            [
+                'name' => 'Categoría de ingresos'
             ]
         ];
 

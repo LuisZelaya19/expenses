@@ -88,6 +88,13 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
   /*bg-indigo-500*/
 }
 
+.dataTables_length,
+.dataTables_filter,
+.dt-buttons {
+    margin-bottom: 0.333em;
+    margin-top: .2rem;
+}
+
 label.required::after {
     content: " *";
     color: red;

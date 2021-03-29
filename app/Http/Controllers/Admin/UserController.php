@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -40,7 +43,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all()->pluck('name', 'id');
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -49,9 +54,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $users = User::create($request->validated());
+
+        $users->roles()->sync($request->input('roles', []));
+
+        return redirect()->route('users.index')->withSuccess('Usuario creado exitosamente');
     }
 
     /**
@@ -73,7 +82,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all()->pluck('name', 'id');
+
+        $user->load('roles');
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -83,9 +96,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+
+        $user->roles()->sync($request->input('roles', []));
+
+        return redirect()->route('users.index')->withSuccess('Usuario editado exitosamente');
     }
 
     /**
