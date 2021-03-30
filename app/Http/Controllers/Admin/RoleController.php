@@ -9,6 +9,8 @@ use App\Models\Module;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 
 class RoleController extends Controller
@@ -20,6 +22,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         if (request()->ajax()) {
             $roles =  Role::with('permissions')->select('roles.*');
 
@@ -43,6 +47,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         $modules = Module::select('id', 'name')->get();
 
         $permissions = [];
@@ -90,6 +96,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         $modules = Module::select('id', 'name')->get();
 
         $role->load('permissions');

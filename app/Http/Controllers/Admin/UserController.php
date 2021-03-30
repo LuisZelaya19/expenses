@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
@@ -19,6 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         $users = User::with('roles')->select('users.*');
 
         if (request()->ajax()) {
@@ -43,6 +47,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         $roles = Role::all()->pluck('name', 'id');
 
         return view('admin.users.create', compact('roles'));
@@ -82,6 +88,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         $roles = Role::all()->pluck('name', 'id');
 
         $user->load('roles');

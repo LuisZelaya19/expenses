@@ -21,7 +21,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //abort_if(Gate::denies('expense_access'), Response::HTTP_FORBIDDEN, '403 Acceso Prohibido');
+        abort_if(Gate::denies('expense_access'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
 
         if (request()->ajax()) {
             $expenses = Expense::with('expense_category')->select('expenses.*')->orderBy('entry_date', 'DESC');
@@ -46,7 +46,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //abort_if(Gate::denies('expense_create'), Response::HTTP_FORBIDDEN, '403 Acceso Prohibido');
+        abort_if(Gate::denies('expense_create'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
 
         $expense_categories =  ExpenseCategory::all()->pluck('name', 'id');
 
@@ -85,6 +85,8 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
+        abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         $expense_categories = ExpenseCategory::all()->pluck('name', 'id');
 
         return view('admin.expenses.edit', compact('expense', 'expense_categories'));

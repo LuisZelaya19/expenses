@@ -1,57 +1,57 @@
 @extends('layouts.admin')
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <span class="text-lg font-medium">Editar ingreso</span>
-        <em>(* Campos obligatorios)</em>
-    </div>
-    <div class="card-body">
-        <form action="{{route('incomes.update', $income->id)}}" method="post">
-            @csrf
-            @method('PUT')
-            <label for="income_category_id" class="block mt-3 required">
-                <span class="text-gray-700">Tipo de ingreso</span>
-            </label>
-            <select name="income_category_id" class="select2">
-                <option value="">Seleccione</option>
-                @foreach ($income_categories as $id => $income_category)
-                <option value="{{$id}}" {{($income->income_category ? $income->income_category->id : old('income_category_id')) == $id ? 'selected' : ''}}>{{$income_category}}</option>
-                @endforeach
-            </select>
-            @if ($errors->has('income_category_id'))
-            <span class="mt-1 text-sm text-red-600">
-                {{$errors->first('income_category_id')}}
-            </span>
-            @endif
+	<div class="card-header">
+		<span class="text-lg font-medium">Editar ingreso</span>
+		<em><span class="text-red-500">*</span> Campos obligatorios</em>
+	</div>
+	<div class="card-body">
+		<form action="{{route('incomes.update', $income->id)}}" method="post">
+			@csrf
+			@method('PUT')
+			<label for="income_category_id" class="block mt-3 required">
+				<span class="text-gray-700">Tipo de ingreso</span>
+			</label>
+			<select name="income_category_id" class="select2">
+				<option value="">Seleccione</option>
+				@foreach ($income_categories as $id => $income_category)
+				<option value="{{$id}}" {{($income->income_category ? $income->income_category->id : old('income_category_id')) == $id ? 'selected' : ''}}>{{$income_category}}</option>
+				@endforeach
+			</select>
+			@if ($errors->has('income_category_id'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('income_category_id')}}
+			</span>
+			@endif
 
-            <label for="amount" class="block mt-3 required">
-                <span class="text-gray-700">Monto del ingreso</span>
-            </label>
-            <input id="amount" name="amount" class="{{$errors->has('amount') ? 'bg-red-100 ': ' '}} block w-full mt-1 form-input" placeholder="Ingrese la cantidad del ingreso" value="{{old('amount', $income->amount)}}">
-            @if ($errors->has('amount'))
-            <span class="mt-1 text-sm text-red-600">
-                {{$errors->first('amount')}}
-            </span>
-            @endif
+			<label for="amount" class="block mt-3 required">
+				<span class="text-gray-700">Monto del ingreso</span>
+			</label>
+			<input id="amount" name="amount" class="{{$errors->has('amount') ? 'bg-red-100 ': ' '}} block w-full mt-1 form-input" placeholder="Ingrese la cantidad del ingreso" value="{{old('amount', $income->amount)}}">
+			@if ($errors->has('amount'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('amount')}}
+			</span>
+			@endif
 
-            <label for="entry_date" class="block mt-3 required">
-                <span class="text-gray-700">Fecha del ingreso</span>
-            </label>
-            <input id="entry_date" name="entry_date" class="{{$errors->has('entry_date') ? 'bg-red-100 ' : ' '}} block w-full mt-1 form-input datepicker" placeholder="Ingrese la fecha del ingreso" autocomplete="off" readonly value="{{old('entry_date', $income->entry_date)}}">
-            @if ($errors->has('entry_date'))
-            <span class="mt-1 text-sm text-red-600">
-                {{$errors->first('entry_date')}}
-            </span>
-            @endif
+			<label for="entry_date" class="block mt-3 required">
+				<span class="text-gray-700">Fecha del ingreso</span>
+			</label>
+			<input id="entry_date" name="entry_date" class="{{$errors->has('entry_date') ? 'bg-red-100 ' : ' '}} block w-full mt-1 form-input datepicker" placeholder="Ingrese la fecha del ingreso" autocomplete="off" readonly value="{{old('entry_date', $income->entry_date)}}">
+			@if ($errors->has('entry_date'))
+			<span class="mt-1 text-sm text-red-600">
+				{{$errors->first('entry_date')}}
+			</span>
+			@endif
 
-            <label for="description" class="block mt-3">
-                <span class="text-gray-700">Descripcion</span>
-            </label>
-            <textarea name="description" id="description" class="form-input" rows="8" cols="40">{{old('description', $income->description)}}</textarea>
-    </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Editar</button>
-        </form>
-    </div>
+			<label for="description" class="block mt-3">
+				<span class="text-gray-700">Descripcion</span>
+			</label>
+			<textarea name="description" id="description" class="form-input" rows="8" cols="40">{{old('description', $income->description)}}</textarea>
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-primary">Editar</button>
+		</form>
+	</div>
 </div>
 @endsection

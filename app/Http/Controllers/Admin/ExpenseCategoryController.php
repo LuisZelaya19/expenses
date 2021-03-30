@@ -7,6 +7,8 @@ use App\Http\Requests\StoreExpenseCategoryRequest;
 use App\Http\Requests\UpdateExpenseCategoryRequest;
 use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 
 class ExpenseCategoryController extends Controller
@@ -18,6 +20,8 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('expense_category_access'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
+
         if (request()->ajax()) {
             $expenseCategory =  ExpenseCategory::select(['id', 'name']);
 

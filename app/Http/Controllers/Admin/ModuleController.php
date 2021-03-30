@@ -7,6 +7,8 @@ use App\Http\Requests\StoreModuleRequest;
 use App\Http\Requests\UpdateModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 
 class ModuleController extends Controller
@@ -18,6 +20,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('module_access'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         $modules =  Module::all('id', 'name');
 
         if (request()->ajax()) {
@@ -37,6 +41,8 @@ class ModuleController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('module_create'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.modules.create');
     }
 
@@ -72,6 +78,8 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
+        abort_if(Gate::denies('module_edit'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.modules.edit', compact('module'));
     }
 

@@ -13,6 +13,7 @@
         "@fortawesome/fontawesome-free": "^5.15.2",
         "autoprefixer": "^10.2.4",
         "axios": "^0.21",
+        "is-svg": "^4.2.2",
         "kutty": "^0.5.0",
         "laravel-mix": "^6.0.11",
         "lodash": "^4.17.19",

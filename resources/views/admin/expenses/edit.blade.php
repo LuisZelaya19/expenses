@@ -3,7 +3,7 @@
 <div class="card">
 	<div class="card-header">
 		<span class="text-lg font-medium">Editar gasto</span>
-		<em>(* Campos obligatorios)</em>
+		<em><span class="text-red-500">*</span> Campos obligatorios</em>
 	</div>
 	<div class="card-body">
 		<form action="{{route('expenses.update', $expense->id)}}" method="post">

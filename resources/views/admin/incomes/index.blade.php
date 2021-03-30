@@ -1,9 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 <div class="mb-4 grid justify-items-end">
+	@can('income_create')
 	<a class="btn btn-primary" href="{{route('incomes.create')}}">
 		<i class="fas fa-plus"></i> Nuevo
 	</a>
+	@endcan
 </div>
 <div class="card">
 	<div class="card-header">

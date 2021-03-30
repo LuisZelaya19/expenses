@@ -7,6 +7,8 @@ use App\Http\Requests\StoreIncomeCategoryRequest;
 use App\Http\Requests\UpdateIncomeCategoryRequest;
 use App\Models\IncomeCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\DataTables;
 
 class IncomeCategoryController extends Controller
@@ -18,6 +20,8 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('income_category_access'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         if (request()->ajax()) {
             $incomeCategory = IncomeCategory::select(['id', 'name']);
 
@@ -26,6 +30,7 @@ class IncomeCategoryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+
         return view('admin.incomeCategories.index');
     }
 
@@ -36,6 +41,8 @@ class IncomeCategoryController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('income_category_create'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.incomeCategories.create');
     }
 
@@ -71,6 +78,8 @@ class IncomeCategoryController extends Controller
      */
     public function edit(IncomeCategory $incomeCategory)
     {
+        abort_if(Gate::denies('income_category_edit'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.incomeCategories.edit', compact('incomeCategory'));
     }
 

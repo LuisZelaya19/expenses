@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use App\Models\Permission;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 //use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -18,6 +20,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         if (request()->ajax()) {
             $permissions = Permission::all();
             return DataTables::of($permissions)
@@ -35,6 +39,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.permissions.create');
     }
 
@@ -70,6 +76,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Acceso Denegado');
+
         return view('admin.permissions.edit', compact('permission'));
     }
 
