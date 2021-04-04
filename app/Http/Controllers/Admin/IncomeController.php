@@ -62,7 +62,7 @@ class IncomeController extends Controller
     {
         Income::create($request->validated());
 
-        return redirect()->route('incomes.index');
+        return redirect()->route('incomes.index')->withToastSuccess('Ingreso agregado exitosamente');
     }
 
     /**

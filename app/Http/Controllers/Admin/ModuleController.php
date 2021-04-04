@@ -56,7 +56,7 @@ class ModuleController extends Controller
     {
         Module::create($request->validated());
 
-        return redirect()->route('modules.index')->withSuccess('Modulo registrado exitosamente');
+        return redirect()->route('modules.index')->withToastSuccess('Modulo registrado exitosamente');
     }
 
     /**
@@ -94,7 +94,7 @@ class ModuleController extends Controller
     {
         $module->update($request->validated());
 
-        return redirect()->route('modules.index')->withSuccess('Modulo editado exitosamente');
+        return redirect()->route('modules.index')->withToastSuccess('Modulo editado exitosamente');
     }
 
     /**

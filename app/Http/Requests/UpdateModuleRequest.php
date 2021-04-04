@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateModuleRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class UpdateModuleRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('module_edit'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
         return true;
     }
 

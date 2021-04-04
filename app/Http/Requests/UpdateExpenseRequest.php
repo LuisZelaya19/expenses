@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateExpenseRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
         return true;
     }
 

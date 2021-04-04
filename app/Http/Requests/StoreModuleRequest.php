@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreModuleRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class StoreModuleRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('module_create'), Response::HTTP_FORBIDDEN, '403 Acceso denegado');
         return true;
     }
 

@@ -53,7 +53,7 @@ class ExpenseCategoryController extends Controller
     {
         ExpenseCategory::create($request->validated());
 
-        return redirect()->route('expenseCategories.index');
+        return redirect()->route('expenseCategories.index')->withToastSuccess('Categoria de gasto agregada exitosamente');
     }
 
     /**
@@ -89,7 +89,7 @@ class ExpenseCategoryController extends Controller
     {
         $expenseCategory->update($request->validated());
 
-        return redirect()->route('expenseCategories.index')->withSuccess('Categoria de gasto editada exitosamente');
+        return redirect()->route('expenseCategories.index')->withToastSuccess('Categoria de gasto editada exitosamente');
     }
 
     /**

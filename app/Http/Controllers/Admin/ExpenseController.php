@@ -103,7 +103,7 @@ class ExpenseController extends Controller
     {
         $expense->update($request->validated());
 
-        return redirect()->route('expenses.index');
+        return redirect()->route('expenses.index')->withToastSuccess('Gasto editado exitosamente');
     }
 
     /**

@@ -74,7 +74,7 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->input('permissions', []));
 
-        return redirect()->route('roles.index')->withSuccess('Rol agregado exitosamente');
+        return redirect()->route('roles.index')->withToastSuccess('Rol agregado exitosamente');
     }
 
     /**
@@ -126,7 +126,7 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->input('permissions', []));
 
-        return redirect()->route('roles.index')->withSuccess('Rol editado exitosamente');
+        return redirect()->route('roles.index')->withToastSuccess('Rol editado exitosamente');
     }
 
     /**

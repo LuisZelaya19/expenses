@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $users->roles()->sync($request->input('roles', []));
 
-        return redirect()->route('users.index')->withSuccess('Usuario creado exitosamente');
+        return redirect()->route('users.index')->withToastSuccess('Usuario creado exitosamente');
     }
 
     /**
@@ -110,7 +110,7 @@ class UserController extends Controller
 
         $user->roles()->sync($request->input('roles', []));
 
-        return redirect()->route('users.index')->withSuccess('Usuario editado exitosamente');
+        return redirect()->route('users.index')->withToastSuccess('Usuario editado exitosamente');
     }
 
     /**

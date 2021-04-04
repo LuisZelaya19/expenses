@@ -54,7 +54,7 @@ class PermissionController extends Controller
     {
         Permission::create($request->validated());
 
-        return redirect()->route('permissions.index')->withSuccess('Permiso agregado exitosamente');
+        return redirect()->route('permissions.index')->withToastSuccess('Permiso agregado exitosamente');
     }
 
     /**
@@ -92,7 +92,7 @@ class PermissionController extends Controller
     {
         $permission->update($request->validated());
 
-        return redirect()->route('permissions.index')->withSuccess('Permision editado exitosamente');
+        return redirect()->route('permissions.index')->withToastSuccess('Permiso editado exitosamente');
     }
 
     /**

@@ -56,7 +56,7 @@ class IncomeCategoryController extends Controller
     {
         IncomeCategory::create($request->validated());
 
-        return view('admin.incomeCategories.index');
+        return redirect()->route('incomeCategories.index')->withToastSuccess('Categoria de ingreso agregada exitosamente');
     }
 
     /**
@@ -94,7 +94,7 @@ class IncomeCategoryController extends Controller
     {
         $incomeCategory->update($request->validated());
 
-        return redirect()->route('incomeCategories.index')->withSuccess('Categoria de ingreso editada exitosamente');
+        return redirect()->route('incomeCategories.index')->withToastSuccess('Categoria de ingreso editada exitosamente');
     }
 
     /**
