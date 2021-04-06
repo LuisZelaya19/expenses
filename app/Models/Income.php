@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Income extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, MultiTenantModelTrait, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -39,5 +40,10 @@ class Income extends Model
     public function income_category()
     {
         return $this->belongsTo(IncomeCategory::class);
+    }
+
+    public function created_by_user()
+    {
+        return $this->belongsTo(User::class, 'created_by_user');
     }
 }

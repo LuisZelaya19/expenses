@@ -53,4 +53,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'created_by_user', 'id');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class, 'created_by_user', 'id');
+    }
+
+    public function expense_categories()
+    {
+        return $this->hasMany(ExpenseCategory::class, 'created_by_user', 'id');
+    }
+
+    public function income_categories()
+    {
+        return $this->hasMany(IncomeCategory::class, 'created_by_user', 'id');
+    }
 }

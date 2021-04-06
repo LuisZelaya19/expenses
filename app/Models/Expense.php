@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,14 +10,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Expense extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, MultiTenantModelTrait, SoftDeletes;
 
     protected $fillable = [
         'name',
         'amount',
         'entry_date',
         'description',
-        'expense_category_id'
+        'expense_category_id',
+        'created_by_user'
     ];
 
     protected $dates = [
@@ -39,5 +41,10 @@ class Expense extends Model
     public function expense_category()
     {
         return $this->belongsTo(ExpenseCategory::class);
+    }
+
+    public function created_by_user()
+    {
+        return $this->belongsTo(User::class, 'created_by_user');
     }
 }

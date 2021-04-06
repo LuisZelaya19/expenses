@@ -15,6 +15,7 @@ class AddRelationshipFieldsToIncomesTable extends Migration
     {
         Schema::table('incomes', function (Blueprint $table) {
             $table->foreignId('income_category_id')->constrained();
+            $table->foreignId('created_by_user')->nullable()->constrained('users');
         });
     }
 

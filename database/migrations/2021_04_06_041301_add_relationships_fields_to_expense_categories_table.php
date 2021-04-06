@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRelationshipFieldsToExpensesTable extends Migration
+class AddRelationshipsFieldsToExpenseCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddRelationshipFieldsToExpensesTable extends Migration
      */
     public function up()
     {
-        Schema::table('expenses', function (Blueprint $table) {
-            $table->foreignId('expense_category_id')->constrained();
+        Schema::table('expense_categories', function (Blueprint $table) {
             $table->foreignId('created_by_user')->nullable()->constrained('users');
         });
     }
@@ -26,7 +25,7 @@ class AddRelationshipFieldsToExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::table('expenses', function (Blueprint $table) {
+        Schema::table('expense_categories', function (Blueprint $table) {
             //
         });
     }
