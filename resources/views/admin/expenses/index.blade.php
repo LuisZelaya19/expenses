@@ -38,6 +38,9 @@
 			}
 		});
 
+		$('.expense_table').on('draw.dt', function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
 
 		let table = $('.expense_table').DataTable({
 				processing: true,

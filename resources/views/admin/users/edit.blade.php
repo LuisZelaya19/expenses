@@ -12,7 +12,7 @@
 			<label for="name" class="block mt-2 required">
 				<span class="text-gray-700">{{__('Nombre')}}</span>
 			</label>
-			<input id="name" name="name" class="{{ $errors->has('name') ? 'bg-red-100 ': ' ' }} block w-full mt-1 form-input" placeholder="Ingrese el nombre del rol" value="{{old('name', $user->name)}}" required>
+			<input id="name" name="name" class="{{ $errors->has('name') ? 'bg-red-100 ': ' ' }} block w-full mt-1 form-input" placeholder="Ingrese el nombre del usuario" value="{{old('name', $user->name)}}" required>
 			@if ($errors->has('name'))
 			<span class="mt-1 text-sm text-red-600">
 				{{$errors->first('name')}}

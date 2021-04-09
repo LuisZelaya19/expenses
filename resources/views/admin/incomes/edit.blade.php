@@ -27,7 +27,7 @@
 			<label for="amount" class="block mt-3 required">
 				<span class="text-gray-700">Monto del ingreso</span>
 			</label>
-			<input id="amount" name="amount" class="{{$errors->has('amount') ? 'bg-red-100 ': ' '}} block w-full mt-1 form-input" placeholder="Ingrese la cantidad del ingreso" value="{{old('amount', $income->amount)}}">
+			<input id="amount" name="amount" class="{{$errors->has('amount') ? 'bg-red-100 ': ' '}} block w-full mt-1 form-input" placeholder="Ingrese el monto del ingreso" value="{{old('amount', $income->amount)}}">
 			@if ($errors->has('amount'))
 			<span class="mt-1 text-sm text-red-600">
 				{{$errors->first('amount')}}
