@@ -15,6 +15,11 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+			[
+				'name' => 'user_administration_access',
+				'description' => 'Acceso a la administración de usuarios, roles, permisos y módulos',
+				'module_id' => 1,
+			]
             [
                 'name' => 'user_access',
                 'description' => 'Acceder al listado de usuarios',
