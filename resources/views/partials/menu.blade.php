@@ -4,7 +4,7 @@
 			<a class="flex items-center px-4 py-3 cursor-pointer transition group hover:bg-gray-800 hover:text-gray-200" href="#">
 				<span> <i class="fas fa-home"></i> Home</span>
 			</a>
-			@can('user_administrarion_access')
+			@can('user_administration_access')
 			<div x-data="collapse()">
 				<div class="flex items-center justify-between px-4 py-3 cursor-pointer transition group hover:bg-gray-800 hover:text-gray-200" role="button" x-spread="trigger">
 					<div class="flex items-center">
