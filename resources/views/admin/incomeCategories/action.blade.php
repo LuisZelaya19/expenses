@@ -1,5 +1,5 @@
 @can('income_category_edit')
-<a href="{{route('incomeCategories.edit', $id)}}" class="btn btn-sm btn-light-primary" x-data="tooltip()" x-spread="tooltip" x-position="top" title="Editar categoria de ingreso">
+<a href="{{route('incomeCategories.edit', $id)}}" class="btn btn-sm btn-light-primary">
 	<i class="fas fa-edit"></i>
 </a>
 @endcan

@@ -1,5 +1,5 @@
 @can('role_edit')
-<a href="{{route('roles.edit', $id)}}" class="btn btn-sm btn-light-primary" x-data="tooltip()" x-spread="tooltip" x-position="top" title="Editar rol">
+<a href="{{route('roles.edit', $id)}}" class="btn btn-sm btn-light-primary">
 	<i class="fas fa-edit"></i>
 </a>
 @endcan

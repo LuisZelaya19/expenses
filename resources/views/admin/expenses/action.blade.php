@@ -1,5 +1,5 @@
 @can('expense_edit')
-<a href="{{route('expenses.edit', $id)}}" class="btn btn-sm btn-light-primary" x-data="tooltip()" x-spread="tooltip" title="Editar gasto">
+<a href="{{route('expenses.edit', $id)}}" class="btn btn-sm btn-light-primary">
 	<i class="fas fa-edit"></i>
 </a>
 @endcan
